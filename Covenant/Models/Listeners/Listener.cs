@@ -4,6 +4,7 @@
 
 using System;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -12,6 +13,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Newtonsoft.Json;
 
 using Covenant.Core;
+using Covenant.Models.Grunts;
 
 namespace Covenant.Models.Listeners
 {
@@ -22,7 +24,7 @@ namespace Covenant.Models.Listeners
         public string Name { get; set; }
         public string Description { get; set; }
 
-        [JsonIgnore]
+        [JsonIgnore, System.Text.Json.Serialization.JsonIgnore]
         public List<Listener> Listeners { get; set; }
     }
 
@@ -48,7 +50,7 @@ namespace Covenant.Models.Listeners
         [Required, Range(1, 65535)]
         public int BindPort { get; set; } = 80;
         [Required]
-        public List<string> ConnectAddresses { get; set; }
+        public List<string> ConnectAddresses { get; set; } = new List<string>();
         [Required, Range(1, 65535)]
         public int ConnectPort { get; set; } = 80;
         [Required]
